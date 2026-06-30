@@ -16,10 +16,15 @@ const ProductCard = ({ product }) => {
   );
 
   const cartItem = items.find((item) => item.id === id);
-  const qty = cartItem?.qty ?? 0;
+  const quantityInCart = cartItem?.qty ?? 0;
+  const isInCart = quantityInCart > 0;
+
+  const buttonText = isInCart ? `In cart (${quantityInCart})` : "Add to cart";
+
+  const handleAddToCart = () => addToCart(product);
 
   return (
-    <div className="product-card">
+    <article className="product-card">
       <div className="product-card__image-wrapper">
         <img className="product-card__image" src={thumbnail} alt={title} />
       </div>
@@ -37,14 +42,14 @@ const ProductCard = ({ product }) => {
 
           <Button
             icon={ShoppingCart}
-            onClick={() => addToCart(product)}
-            className={qty > 0 ? "product-card__btn--active" : ""}
+            onClick={handleAddToCart}
+            className={isInCart ? "product-card__btn--active" : ""}
           >
-            {qty > 0 ? `In cart (${qty})` : "Add to cart"}
-          </Button>
+            {buttonText}
+          </Button> 
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 
