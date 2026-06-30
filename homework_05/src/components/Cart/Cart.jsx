@@ -24,32 +24,29 @@ const Cart = ({ onClose }) => {
     onClose();
   };
 
-  if (isEmpty) {
-    return (
-      <section className="cart">
-        <h2 className="cart__title">Shopping Cart</h2>
-        <p className="cart__empty">Your cart is empty.</p>
-      </section>
-    );
-  }
-
   return (
     <section className="cart">
       <h2 className="cart__title">Shopping Cart</h2>
 
-      <div className="cart__items">
-        {items.map((item) => (
-          <CartItem key={item.id} item={item} />
-        ))}
-      </div>
+      {isEmpty ? (
+        <p className="cart__empty">Your cart is empty.</p>
+      ) : (
+        <>
+          <div className="cart__items">
+            {items.map((item) => (
+              <CartItem key={item.id} item={item} />
+            ))}
+          </div>
 
-      <div className="cart__footer">
-        <span className="cart__total">Total: ${totalPrice}</span>
+          <div className="cart__footer">
+            <span className="cart__total">Total: ${totalPrice}</span>
 
-        <Button className="cart__clear-btn" onClick={handleClearCart}>
-          Clear Cart
-        </Button>
-      </div>
+            <Button className="cart__clear-btn" onClick={handleClearCart}>
+              Clear Cart
+            </Button>
+          </div>
+        </>
+      )}
     </section>
   );
 };
