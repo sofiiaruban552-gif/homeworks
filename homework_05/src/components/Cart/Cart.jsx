@@ -13,34 +13,38 @@ const Cart = () => {
     })),
   );
 
-  const totalPrice = items.reduce(
-    (sum, item) => sum + item.price * item.qty,
-    0,
-  );
+  const isEmpty = items.length === 0;
+
+  const totalPrice = items
+    .reduce((total, item) => total + item.price * item.qty, 0)
+    .toFixed(2);
+
+  if (isEmpty) {
+    return (
+      <section className="cart">
+        <h2 className="cart__title">Shopping Cart</h2>
+        <p className="cart__empty">Your cart is empty.</p>
+      </section>
+    );
+  }
 
   return (
     <section className="cart">
       <h2 className="cart__title">Shopping Cart</h2>
 
-      {items.length === 0 ? (
-        <p className="cart__empty">Your cart is empty.</p>
-      ) : (
-        <>
-          <div className="cart__items">
-            {items.map((item) => (
-              <CartItem key={item.id} item={item} />
-            ))}
-          </div>
+      <div className="cart__items">
+        {items.map((item) => (
+          <CartItem key={item.id} item={item} />
+        ))}
+      </div>
 
-          <div className="cart__footer">
-            <span className="cart__total">Total: ${totalPrice.toFixed(2)}</span>
+      <div className="cart__footer">
+        <span className="cart__total">Total: ${totalPrice}</span>
 
-            <Button className="cart__clear-btn" onClick={clearCart}>
-              Clear Cart
-            </Button>
-          </div>
-        </>
-      )}
+        <Button className="cart__clear-btn" onClick={clearCart}>
+          Clear Cart
+        </Button>
+      </div>
     </section>
   );
 };

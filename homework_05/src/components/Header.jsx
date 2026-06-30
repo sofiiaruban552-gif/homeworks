@@ -7,6 +7,7 @@ const Header = ({ onCartClick }) => {
   const totalItems = useCartStore((state) =>
     state.items.reduce((sum, item) => sum + item.qty, 0),
   );
+
   return (
     <header className="header">
       <div className="header__logo">

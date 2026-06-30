@@ -42,9 +42,13 @@ const App = () => {
     product.title.toLowerCase().includes(debouncedSearch.toLowerCase()),
   );
 
+  const handleCartToggle = () => {
+    setIsCartOpen((prev) => !prev);
+  };
+
   return (
     <div className="wrapper">
-      <Header onCartClick={() => setIsCartOpen((prev) => !prev)} />
+      <Header onCartClick={handleCartToggle} />
       {isCartOpen && <Cart />}
       <Filters
         search={search}
