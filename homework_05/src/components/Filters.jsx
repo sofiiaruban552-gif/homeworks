@@ -3,10 +3,18 @@ import { Search, Tags } from "lucide-react";
 const Filters = ({
   search = "",
   onSearchChange,
-  categories,
+  categories = [],
   selectedCategory = "",
   onCategoryChange,
 }) => {
+  const handleSearchChange = (event) => {
+    onSearchChange(event.target.value);
+  };
+
+  const handleCategoryChange = (event) => {
+    onCategoryChange(event.target.value);
+  };
+
   return (
     <section className="filters">
       <div className="filters__search-wrapper">
@@ -17,7 +25,7 @@ const Filters = ({
           type="text"
           placeholder="Search products..."
           value={search}
-          onChange={(e) => onSearchChange(e.target.value)}
+          onChange={handleSearchChange}
         />
       </div>
 
@@ -27,7 +35,7 @@ const Filters = ({
         <select
           className="filters__select"
           value={selectedCategory}
-          onChange={(e) => onCategoryChange(e.target.value)}
+          onChange={handleCategoryChange}
         >
           <option value="">All categories</option>
 
