@@ -8,6 +8,8 @@ const Header = ({ onCartClick }) => {
     state.items.reduce((sum, item) => sum + item.qty, 0),
   );
 
+  const hasItemsInCart = totalItems > 0;
+
   return (
     <header className="header">
       <div className="header__logo">
@@ -22,7 +24,7 @@ const Header = ({ onCartClick }) => {
           className="header__cart"
         />
 
-        {totalItems > 0 && (
+        {hasItemsInCart && (
           <span className="header__cart-badge">{totalItems}</span>
         )}
       </div>
