@@ -23,6 +23,7 @@ const App = () => {
     useFilters();
 
   const debouncedSearch = useDebounce(search);
+  const normalizedSearch = debouncedSearch.trim().toLowerCase();
 
   const productsUrl = selectedCategory
     ? `${API.PRODUCTS_BY_CATEGORY}${selectedCategory}`
@@ -39,7 +40,7 @@ const App = () => {
   const categories = categoriesData ?? [];
 
   const products = (productsData?.products ?? []).filter((product) =>
-    product.title.toLowerCase().includes(debouncedSearch.toLowerCase()),
+    product.title.toLowerCase().includes(normalizedSearch),
   );
 
   const handleCartToggle = () => {
